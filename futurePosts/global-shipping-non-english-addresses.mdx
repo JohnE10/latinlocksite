@@ -1,0 +1,150 @@
+---
+title: "Selling Globally? Here’s How to Handle Non-English Shipping Addresses"
+slug: "non-english-shipping-addresses"
+description: "Learn why carriers often reject non-English shipping addresses, and how to balance customer experience with carrier requirements by blocking, allowing, or transliterating non-Latin characters."
+date: "2025-09-06"
+---
+
+# Selling globally? Here’s how to handle non-English shipping addresses
+
+*Short version:* Don’t force a blunt “block everything non-Latin” or blindly accept every script a customer types. The practical, safest approach for most merchants is: **collect a clean Latin-script address for routing**, optionally let customers provide a local-script version for the last mile, and apply targeted controls (character whitelists, line-length limits, carrier rules) rather than a one-size-fits-all ban. Below is a thorough explanation, why it matters, and concrete strategies you can adopt today.
+
+---
+
+## TL;DR — Why this matters to merchants
+- International postal and carrier systems expect addresses in **Roman (Latin) letters and Arabic numerals** for the international routing leg; that expectation comes from UPU guidance and national postal rules.  
+- Major carriers and shipping APIs often **do not accept Unicode / double-byte characters** or recommend avoiding non-ASCII input; submitting non-Latin characters can cause label errors, mangled prints, or manual handling.  
+- Label printers, EDI feeds, customs forms and automated sorters have real limits (line lengths, allowed characters). When these are exceeded or contain unexpected scripts, packages are delayed, rerouted, or returned — which costs time and money.
+
+---
+
+## 1) The reality: standards + legacy systems
+Two separate things drive the behavior you see from carriers and postal systems:
+
+1. **Policy / standards** — The Universal Postal Union (UPU) and many national postal administrations require that *the international addressing information* be written in Roman (Latin) letters and Arabic numerals so the item can pass through the international routing system. Local scripts may be added as a supplement but are not a substitute.  
+
+2. **Technical reality** — A lot of the carrier ecosystem (APIs, older label-printing pipelines, manifest systems, and EDI connections) was built around ASCII / single-byte encodings and fixed label formats. That infrastructure still handles most of the world’s parcel volume, so carriers either reject non-Latin input or normalize it (strip/replace) to avoid downstream failures.  
+
+**Takeaway:** This is a mix of legal/standards expectations *and* practical technical constraints — both must be respected to avoid failed shipments.
+
+---
+
+## 2) Common failure points you’ll actually see
+- **API rejects or warnings.** Some carrier APIs explicitly instruct shippers to avoid non-ASCII characters; FedEx documentation and others warn that non-ASCII input may produce bad labels.  
+- **Label print errors.** Even when a carrier accepts Unicode in its API, the **label rendering** stage (Zebra printers, older thermal printers) may lack proper fonts/firmware and display boxes or question marks.  
+- **Line/field limits.** Many carriers impose per-line character limits (e.g., 35 characters per line in some DHL specs), which makes addresses with long local-script words problematic.  
+- **Customs / documents mismatch.** Customs forms and EDI exports are expected in Latin script for many jurisdictions; mismatches can block clearance.  
+
+---
+
+## 3) The two opposing choices merchants face — and why neither extreme is perfect
+
+**A. Allow everything (no blocking)**  
+Pros:
+- Best customer experience for non-Latin customers — they can type names and addresses naturally.  
+Cons:
+- High risk of label errors, manual routing, returns, and higher shipping/admin costs when the carrier pipeline can’t handle those characters.
+
+**B. Block everything non-Latin (hard block)**  
+Pros:
+- Maximum compatibility with legacy carrier pipelines; fewer label errors.  
+Cons:
+- Bad UX for many customers, potential lost sales, and inaccuracy (you may force customers to input wrong spellings or transliterations).
+
+**The balance:** Allow local script for *display or delivery notes*, but require a **Latin-script canonical address** for the routing/label fields. This hybrid keeps carriers happy while still respecting customers’ native scripts for the last mile.
+
+---
+
+## 4) Recommended, practical approach (step-by-step)
+
+### A — Capture both: canonical Latin + optional local script
+- **Primary shipping fields** (the ones you feed carriers): enforce a Latin whitelist and store a clean, ASCII-friendly version.  
+- **Optional field** (not required for label generation): “Delivery note (local script)” where customers can paste the address in their native script for the delivery driver or for inclusion on a slip inside the parcel.
+
+### B — Make it obvious to customers
+At checkout explain why you ask for a Latin version — e.g.,
+
+> “To ensure speedy international routing, please provide the address in Latin characters (you can also add the native script in the optional field).”
+
+### C — Offer transliteration as an opt-in or post-order process
+- **Automatic transliteration** is imperfect: multiple transliterations may exist for a single name (e.g., Chinese/Japanese romanizations), and changing what the customer typed can be confusing.  
+- Safer approaches:  
+  - Offer transliteration suggestions for the customer to accept.  
+  - Transliterate server-side after order placement and let merchants confirm before shipping.
+
+### D — Enforce targeted validation rules
+- Whitelist character classes for the **label fields**: A–Z, 0–9, spaces, and common punctuation.  
+- Enforce per-line length limits before generating labels (e.g., 35 characters per line for DHL).
+
+### E — Print an internal slip with the native script
+If the customer supplied a local script field, include it on the packing list or an internal slip.
+
+### F — Test with carrier sandboxes and validate end-to-end
+Always confirm behavior with the carriers you actually use.
+
+---
+
+## 5) Carrier-specific notes
+- **UPS:** historically doesn’t support double-byte (Unicode/UTF-8) characters and expects Latin characters.  
+- **FedEx:** warns against feeding non-ASCII characters into shipment requests.  
+- **DHL:** imposes per-line limits and character restrictions.  
+
+Because carriers vary, **test each one**.
+
+---
+
+## 6) Printing & hardware realities
+Even if a carrier accepts Unicode in its API, printing hardware (like Zebra thermal printers) may lack proper fonts. The ZPL `^CI` command supports UTF-8 if the printer firmware and fonts are correct, but not every fulfillment center has that setup.  
+
+If you don’t control printing, **stick to Latin routing fields.**
+
+---
+
+## 7) UX examples
+
+**Checkout copy (short):**  
+> “For international shipping we need your address in Latin characters (A–Z, 0–9). If you’d like, you can also paste the address in your native script in the ‘Local delivery note’ box — we’ll include it for the delivery driver.”
+
+**Flow option 1 (hybrid):**
+1. Primary address fields accept only Latin characters.  
+2. Optional “Local script” text area below.  
+3. Order confirmation includes both.
+
+**Flow option 2 (transliteration):**
+1. Customer types native script.  
+2. App suggests transliteration for approval.  
+
+---
+
+## 8) Shopify-specific considerations
+Shopify checkout customization depends on merchant plan and extension capabilities:  
+- Deep changes at checkout are limited for non-Plus merchants.  
+- For Plus stores, you can use Checkout UI extensions to enforce validation.  
+- Non-Plus stores may need server-side validation or post-order review.  
+
+---
+
+## 9) Quick testing checklist
+- [ ] Test with carrier APIs (UPS, FedEx, DHL).  
+- [ ] Print on actual hardware.  
+- [ ] Confirm customs forms show Latin script.  
+- [ ] Validate line lengths.  
+- [ ] Check that your UX messaging reduces friction.  
+
+---
+
+## 10) Tools to consider
+- **ICU Transliterators** — for robust script conversion.  
+- **npm libraries** like `transliteration` or `unidecode` — for Latinization with review.  
+
+---
+
+## Final recommendations
+1. **Require Latin-script addresses for routing.**  
+2. **Offer an optional local-script field.**  
+3. **Use transliteration only with customer approval.**  
+4. **Test carriers and printers you actually use.**
+
+---
+
+Would you like me to also create a **shorter “executive summary” MDX version** (around 500–600 words) that you can use as a secondary, more digestible post alongside this detailed one? That way you’d have both a deep-dive and a quick-read version for your blog.
