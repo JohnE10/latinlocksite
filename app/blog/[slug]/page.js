@@ -22,44 +22,47 @@ export async function generateStaticParams() {
   return params.filter(Boolean);
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params: rawParams }) {
+  const { slug } = await rawParams;
+
   const postsDir = path.join(process.cwd(), "app", "blog", "posts");
-  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".jsx"));
+  const files = fs.readdirSync(postsDir).filter((file) => file.endsWith(".jsx"));
 
   for (const file of files) {
-    try {
-      const mod = await import(`../posts/${file}`);
-      const meta = mod.metadata;
-      if (meta?.slug === params.slug) {
-        return {
+    const mod = await import(`../posts/${file}`);
+    const meta = mod.metadata;
+    if (meta?.slug === slug) {
+      return {
+        title: meta.title,
+        description: meta.description,
+        openGraph: {
           title: meta.title,
           description: meta.description,
-          openGraph: {
-            title: meta.title,
-            description: meta.description,
-            type: "article",
-          },
-        };
-      }
-    } catch {}
+          type: "article",
+        },
+      };
+    }
   }
 
   return {};
 }
 
-export default async function BlogPostPage({ params }) {
-  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
-  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".jsx"));
 
-  let PostComponent = null;
+export default async function BlogPostPage({ params: rawParams }) {
+  // Await params
+  const { slug } = await rawParams;
+
+  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const files = fs.readdirSync(postsDir).filter((file) => file.endsWith(".jsx"));
+
+  let PostComponent;
+
   for (const file of files) {
-    try {
-      const mod = await import(`../posts/${file}`);
-      if (mod.metadata?.slug === params.slug) {
-        PostComponent = mod.default;
-        break;
-      }
-    } catch {}
+    const mod = await import(`../posts/${file}`);
+    if (mod.metadata?.slug === slug) {
+      PostComponent = mod.default;
+      break;
+    }
   }
 
   if (!PostComponent) notFound();
@@ -72,3 +75,5 @@ export default async function BlogPostPage({ params }) {
     </main>
   );
 }
+
+

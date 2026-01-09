@@ -67,14 +67,15 @@ export default function Post() {
 
       <p className='my-4'>Common issues include:</p>
 
-      <ol className='list-decimal list-outside pl-8'>
+      <ul className="list-disc list-outside pl-8">
+
         <li className='my-2'>Carrier address rejections</li>
         <li className='my-2'>Incorrect routing or misread destinations</li>
         <li className='my-2'>Shipping label generation failures</li>
         <li className='my-2'>Delayed or returned shipments</li>
-      </ol>
+      </ul>
 
-      
+
 
       <p className='my-4'>
         For merchants, these issues often lead to manual intervention,
@@ -96,18 +97,18 @@ export default function Post() {
         <strong>Step 1</strong>: Open the theme content editor
       </h3>
 
-      
+
 
       <p className='my-4'>From your Shopify admin:</p>
 
-      <ol style={{ marginLeft: "15px" }}>
-        <li className='my-2'>1. Go to Online Store and then Themes</li>
-        <li className='my-2'>2. Find the theme you are currently using</li>
-        <li className='my-2'>3. Click the three dots next to the theme</li>
-        <li className='my-2'>4. Select Edit default theme content</li>
+      <ol className='list-decimal list-outside pl-8'>
+        <li className='my-2'>Go to Online Store and then Themes</li>
+        <li className='my-2'>Find the theme you are currently using</li>
+        <li className='my-2'>Click the three dots next to the theme</li>
+        <li className='my-2'>Select Edit default theme content</li>
       </ol>
 
-      
+
 
       <p className='my-4'>
         This opens Shopify&apos;s theme content editor, which controls text
@@ -118,16 +119,16 @@ export default function Post() {
         <strong>Step 2</strong>: Navigate to the checkout text
       </h3>
 
-      
+
 
       <p className='my-4'>Inside the Theme content editor:</p>
 
-      <ol style={{ marginLeft: "15px" }}>
-        <li className='my-2'>1. Click Checkout and system in the top navigation bar</li>
-        <li className='my-2'>2. Then select Checkout</li>
+      <ol className='list-decimal list-outside pl-8'>
+        <li className='my-2'>Click Checkout and system in the top navigation bar</li>
+        <li className='my-2'>Then select Checkout</li>
       </ol>
 
-      
+
 
       <p className='my-4'>This section contains all text used during the checkout flow.</p>
 
@@ -135,21 +136,21 @@ export default function Post() {
         <strong>Step 3</strong>: Find the shipping address related text
       </h3>
 
-      
+
 
       <p className='my-4'>To locate the correct field:</p>
 
-      <ol style={{ marginLeft: "15px" }}>
+      <ol className='list-decimal list-outside pl-8'>
         <li className='my-2'>
-          1. Use Ctrl + F for windows, or Cmd + F for Mac
+          Use Ctrl + F for windows, or Cmd + F for Mac
         </li>
         <li className='my-2'>
-          2. In the search box that appears, type: shipping address, then press
+          In the search box that appears, type: shipping address, then press
           enter
         </li>
       </ol>
 
-      
+
 
       <p className='my-4'>
         This will bring up a number of input boxes that deal with &apos;shipping
@@ -173,7 +174,7 @@ export default function Post() {
         <strong>Step 4</strong>: Add your shipping address note
       </h3>
 
-      
+
 
       <p className='my-4'>
         In the &apos;Shipping address&apos; text box that comes up (under
@@ -193,15 +194,15 @@ export default function Post() {
         <strong>Step 5</strong>: Test the checkout
       </h3>
 
-      
+
 
       <p className='my-4'>To verify that the message appears correctly:</p>
 
-      <ol style={{ marginLeft: "15px" }}>
-        <li className='my-2'>1. Navigate to your site</li>
-        <li className='my-2'>2. Add a product to the cart and go to checkout</li>
+      <ol className='list-decimal list-outside pl-8'>
+        <li className='my-2'>Navigate to your site</li>
+        <li className='my-2'>Add a product to the cart and go to checkout</li>
         <li className='my-2'>
-          3. Check that your new message now appears above the shipping address
+          Check that your new message now appears above the shipping address
           fields
         </li>
       </ol>
@@ -210,16 +211,16 @@ export default function Post() {
 
       <p className='my-4'>While this checkout warning is helpful, it has important limitations:</p>
 
-      <ol style={{ marginLeft: "15px" }}>
-        <li className='my-2'>• Customers can ignore the message</li>
-        <li className='my-2'>• Shopify does not block invalid characters</li>
+      <ul className="list-disc list-outside pl-8">
+        <li className='my-2'>Customers can ignore the message</li>
+        <li className='my-2'>Shopify does not block invalid characters</li>
         <li className='my-2'>
-          • Express checkout options such as Shop Pay, Apple Pay, and Google Pay
+          Express checkout options such as Shop Pay, Apple Pay, and Google Pay
           may bypass this text entirely
         </li>
-      </ol>
+      </ul>
 
-      
+
 
       <p className='my-4'>
         This means the free solution relies on customer compliance rather than
@@ -240,15 +241,15 @@ export default function Post() {
         warning only:
       </p>
 
-      <ol style={{ marginLeft: "15px" }}>
-        <li className='my-2'>• Customers are prompted to correct their address immediately</li>
-        <li className='my-2'>• Checkout cannot continue until the address is valid</li>
+      <ul className="list-disc list-outside pl-8">
+        <li className='my-2'>Customers are prompted to correct their address immediately</li>
+        <li className='my-2'>Checkout cannot continue until the address is valid</li>
         <li className='my-2'>
-          • Invalid characters never reach your fulfillment or carrier systems
+          Invalid characters never reach your fulfillment or carrier systems
         </li>
-      </ol>
+      </ul>
 
-      
+
 
       <p className='my-4'>
         Many merchants use both approaches together. The checkout message sets
@@ -285,9 +286,8 @@ export default function Post() {
       <p className='my-4'>
         To see the app in action, you can watch this{" "}
         <a style={{ color: "#0000FF" }} href="https://youtu.be/8UdnqKvOZ8o">
-          LatinLock demo video on YouTube
+          LatinLock demo video on YouTube.
         </a>
-        .
       </p>
     </article>
   );
