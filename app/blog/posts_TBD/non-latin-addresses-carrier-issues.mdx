@@ -25,7 +25,7 @@ This post explains **why** that happens, which rules are actually in play, the t
 
 ## 1 - The rulebook: international mail standards favor Latin letters
 
-The **Universal Postal Union (UPU)**—the treaty body that defines the worldwide postal system—has long required that **international addresses be written legibly in Roman (Latin) letters and Arabic numerals**. The UPU’s addressing guidance explicitly cites this rule (Letter Post Regulations RL 123.3.3), and encourages adding the destination country’s native script **in addition** to the required Latin version.
+The **Universal Postal Union (UPU)**—the treaty body that defines the worldwide postal system—has long required that **international addresses be written legibly in Roman (Latin) letters and Arabic numerals**. The UPU's addressing guidance explicitly cites this rule (Letter Post Regulations RL 123.3.3), and encourages adding the destination country's native script **in addition** to the required Latin version.
 
 National posts embed that same rule in their own manuals. For example, the **U.S. Postal Service** says the **recipient and return addresses must appear in Roman letters and Arabic numerals** on international mail; if an address is written in another script (e.g., Cyrillic, Arabic, Chinese, Japanese), USPS requires an **interline English/Roman translation**. Customs forms also must be completed in Roman letters and Arabic numerals.
 
@@ -38,7 +38,7 @@ Beyond policy, many **carrier IT systems** were built decades ago around **singl
 - **UPS** states plainly in its Developer Kit FAQ that **backend and shipping systems (including the Shipping API) do not support double-byte/Unicode (UTF-8)**; **only Latin characters are accepted**. Some UPS file-submission portals also publish strict “valid characters” tables. Practically, invalid characters are removed or replaced, which can break addresses.  
 - **FedEx** developer documentation instructs shippers to **“ensure all values are escaped and not feed non ASCII characters.”** Labels and documents are generated from those ASCII-only values.
 
-Third-party shipping tools see the fallout: when you pass non-Latin characters to a Latin-only pipeline, you’ll often get label errors or “?” substitutions.
+Third-party shipping tools see the fallout: when you pass non-Latin characters to a Latin-only pipeline, you'll often get label errors or “?” substitutions.
 
 ## 3 - The print pipeline: label printers, fonts, and device languages
 
@@ -50,7 +50,7 @@ Bottom line: carriers minimize risk by enforcing Latin characters so labels rema
 
 ## 4 - Automation & OCR: machines expect Latin
 
-High-speed sorters and OCR systems in many origin countries are tuned for Latin scripts, especially on the **international dispatch leg**. The UPU’s own addressing guidance emphasizes formatting addresses to **facilitate automatic reading**, which is easiest when addresses use Roman characters in consistent layouts. When non-Latin text appears without a Latin counterpart, pieces are more likely to be **kicked to manual handling**, slowing things down.
+High-speed sorters and OCR systems in many origin countries are tuned for Latin scripts, especially on the **international dispatch leg**. The UPU's own addressing guidance emphasizes formatting addresses to **facilitate automatic reading**, which is easiest when addresses use Roman characters in consistent layouts. When non-Latin text appears without a Latin counterpart, pieces are more likely to be **kicked to manual handling**, slowing things down.
 
 <div className="flex justify-center my-6 py-[40px]">
   <Image 
@@ -65,7 +65,7 @@ High-speed sorters and OCR systems in many origin countries are tuned for Latin 
 
 ## 5 - Customs and data exchange: Roman letters required
 
-It’s not just the label face. **Customs data (CN22/CN23, commercial invoices, electronic pre-advice)** must be readable by border agencies worldwide. USPS incorporates this into its International Mail Manual: **all information on customs forms must appear in Roman letters and Arabic numerals**. Carriers feed that same data to brokers and government systems—another reason they normalize to Latin.
+It's not just the label face. **Customs data (CN22/CN23, commercial invoices, electronic pre-advice)** must be readable by border agencies worldwide. USPS incorporates this into its International Mail Manual: **all information on customs forms must appear in Roman letters and Arabic numerals**. Carriers feed that same data to brokers and government systems—another reason they normalize to Latin.
 
 ## 6 - Field lengths & “forbidden” characters
 
@@ -77,13 +77,13 @@ In some countries, last-mile carriers deliver more reliably if the address appea
 
 ## 8 - Practical playbook for merchants
 
-Here’s how to stay compliant **and** maximize successful delivery:
+Here's how to stay compliant **and** maximize successful delivery:
 
 1. **Collect Latin by default, allow local script as a helper** — Store a Latin (transliterated) version in the official shipping fields. Provide an optional “Local script for delivery note” field if helpful.  
 2. **Respect line lengths & allowed characters** — Enforce per-line limits (e.g., 35 characters) and strip unsupported punctuation.  
 3. **Keep the country name in an internationally recognized language** — Many specs require English or internationally recognized country names.  
 4. **Mind the customs side** — Ensure product descriptions and names on customs forms are Latin-only and legible; avoid emoji/quotes/special punctuation.  
-5. **Upgrade printers carefully** — If printing labels in-house, ensure UTF-8 support and correct fonts, but don’t assume carriers accept Unicode through APIs.
+5. **Upgrade printers carefully** — If printing labels in-house, ensure UTF-8 support and correct fonts, but don't assume carriers accept Unicode through APIs.
 
 <div className="flex justify-center my-6 py-[40px]">
   <Image 
@@ -98,9 +98,9 @@ Here’s how to stay compliant **and** maximize successful delivery:
 
 ## 9 - How an address-validation app helps
 
-Tools like **LatinLock**, for Shopify stores, enforce Latin-only characters at checkout, ensuring that buyers enter addresses in a format carriers will accept. Merchants can configure the app to allow select non-Latin characters if needed, giving flexibility for certain markets. While the app doesn’t currently handle transliteration (for example, automatically converting “東京” to “Tokyo”), it does prevent inadmissible characters from being included in shipping addresses. This proactive step helps merchants avoid failed label generation, order cancellations, costly returns, and unhappy customers.
+Tools like **LatinLock**, for Shopify stores, enforce Latin-only characters at checkout, ensuring that buyers enter addresses in a format carriers will accept. Merchants can configure the app to allow select non-Latin characters if needed, giving flexibility for certain markets. While the app doesn't currently handle transliteration (for example, automatically converting “東京” to “Tokyo”), it does prevent inadmissible characters from being included in shipping addresses. This proactive step helps merchants avoid failed label generation, order cancellations, costly returns, and unhappy customers.
 
-It’s also worth noting that automatic transliteration at Shopify checkout isn’t straightforward: Shopify doesn’t natively expose transliteration logic in its checkout fields, and transliterating names and addresses in real time can introduce errors or confusion for buyers (e.g., multiple possible Latin spellings for the same character). Instead, blocking unsupported characters up front provides a clear, reliable safeguard without altering customer input in unpredictable ways.
+It's also worth noting that automatic transliteration at Shopify checkout isn't straightforward: Shopify doesn't natively expose transliteration logic in its checkout fields, and transliterating names and addresses in real time can introduce errors or confusion for buyers (e.g., multiple possible Latin spellings for the same character). Instead, blocking unsupported characters up front provides a clear, reliable safeguard without altering customer input in unpredictable ways.
 
 ## Key Takeaways
 
