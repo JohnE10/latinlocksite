@@ -164,10 +164,7 @@ export default function Post() {
       </p>
 
       <p className='my-4'>
-        <strong>Note</strong>: This may or may not happen in your case, but you
-        may need to scroll all the way down the page using the right, vertical
-        scroll bar to load all pertinent fields, otherwise some checkout text
-        will not appear if you search too early.
+        <strong>Note</strong>: The following is not always the case, but you may need to scroll all the way down the page using the right, vertical scroll bar to load all pertinent fields, otherwise some checkout text will not appear if you search too early.
       </p>
 
       <h3>
