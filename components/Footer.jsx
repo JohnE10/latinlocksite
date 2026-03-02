@@ -1,5 +1,5 @@
 // components/Footer.jsx
-import { metadata } from '@/app/layout';
+import { metadata } from '../app/layout';
 
 // components/Footer.jsx
 export default function Footer() {
