@@ -2,6 +2,7 @@
 import { notFound } from "next/navigation";
 import path from "path";
 import fs from "fs";
+import Link from 'next/link';
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "app", "latinlock", "blog", "posts");
@@ -69,6 +70,9 @@ export default async function BlogPostPage({ params: rawParams }) {
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-10">
+      <Link href="/latinlock/blog" className="inline-flex items-center text-gray-500 hover:text-gray-700 mb-6">
+        ← Back
+      </Link>
       <article className="prose prose-lg max-w-none">
         <PostComponent />
       </article>
