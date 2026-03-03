@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.jsx
+// app/latinlock/blog/[slug]/page.js
 import { notFound } from "next/navigation";
 import path from "path";
 import fs from "fs";
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params: rawParams }) {
   const { slug } = await rawParams;
 
-  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const postsDir = path.join(process.cwd(), "app", "latinlock", "blog", "posts");
   const files = fs.readdirSync(postsDir).filter((file) => file.endsWith(".jsx"));
 
   for (const file of files) {
@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params: rawParams }) {
   // Await params
   const { slug } = await rawParams;
 
-  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const postsDir = path.join(process.cwd(), "app", "latinlock", "blog", "posts");
   const files = fs.readdirSync(postsDir).filter((file) => file.endsWith(".jsx"));
 
   let PostComponent;

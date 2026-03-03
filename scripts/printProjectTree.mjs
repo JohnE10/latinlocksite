@@ -1,4 +1,4 @@
-// scripts/printProjectTree.js
+// scripts/printProjectTree.mjs
 import fs from 'fs';
 import path from 'path';
 

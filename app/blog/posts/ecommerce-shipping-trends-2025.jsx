@@ -1,3 +1,4 @@
+// app/blog/posts/ecommerce-shipping-trends-2025.jsx
 import Image from "next/image";
 import Link from "next/link";
 

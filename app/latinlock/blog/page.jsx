@@ -1,11 +1,11 @@
-// app/blog/page.jsx
+// app/latinlock/blog/page.jsx
 import Image from 'next/image';
 import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
 
 export default async function BlogPage() {
-  const postsDir = path.join(process.cwd(), 'app', 'blog', 'posts');
+  const postsDir = path.join(process.cwd(), 'app', 'latinlock', 'blog', 'posts');
 
   const files = fs.readdirSync(postsDir).filter((file) => file.endsWith('.jsx'));
 
@@ -44,7 +44,7 @@ export default async function BlogPage() {
 
               <div>
                 <Link
-                  href={`/blog/${post.slug}`}
+                  href={`/latinlock/blog/${post.slug}`}
                   className="text-2xl font-semibold text-blue-600 hover:underline"
                 >
                   {post.title}

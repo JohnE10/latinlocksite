@@ -1,4 +1,4 @@
-// app/page.jsx
+// app/page.js
 import Link from 'next/link';
 import Image from 'next/image';
 

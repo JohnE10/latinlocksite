@@ -1,4 +1,4 @@
-// app/blog/posts/non-latin-addresses-carrier-issues.jsx
+// app/latinlock/blog/posts/non-latin-addresses-carrier-issues.jsx
 import React from "react";
 import Image from "next/image";
 

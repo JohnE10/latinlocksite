@@ -1,3 +1,4 @@
+// app/blog/posts/checkout-mistakes-cost-shopify-sales.jsx
 import Image from "next/image";
 
 export const metadata = {

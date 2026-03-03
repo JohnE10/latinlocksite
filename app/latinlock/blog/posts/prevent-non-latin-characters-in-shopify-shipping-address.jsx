@@ -1,4 +1,5 @@
-// app/blog/posts/prevent-non-latin-characters-in-shopify-shipping-address.jsx
+// app/latinlock/blog/posts/prevent-non-latin-characters-in-shopify-shipping-address.jsx
+
 import React from "react";
 import Image from "next/image";
 

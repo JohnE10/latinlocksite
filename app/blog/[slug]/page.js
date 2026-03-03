@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.jsx
+// app/blog/[slug]/page.js
 import { notFound } from "next/navigation";
 import path from "path";
 import fs from "fs";

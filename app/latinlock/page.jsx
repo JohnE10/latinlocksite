@@ -1,4 +1,4 @@
-// app/page.jsx
+// app/latinlock/page.jsx
 import Link from 'next/link';
 import Image from 'next/image';
 

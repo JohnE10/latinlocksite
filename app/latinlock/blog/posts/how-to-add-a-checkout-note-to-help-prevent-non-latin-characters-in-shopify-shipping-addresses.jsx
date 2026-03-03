@@ -1,3 +1,4 @@
+// app/latinlock/blog/posts/how-to-add-a-checkout-note-to-help-prevent-non-latin-characters-in-shopify-shipping-addresses.jsx
 import Image from "next/image";
 
 export const metadata = {

@@ -20,7 +20,7 @@ export default function Header() {
         <nav>
           <ul className="flex space-x-[15px]">
             <li>
-              <Link href="/blog" className="text-gray-600 hover:text-gray-900">
+              <Link href="/latinlock/blog" className="text-gray-600 hover:text-gray-900">
                 Blog
               </Link>
             </li>

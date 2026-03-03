@@ -44,6 +44,11 @@ const nextConfig = {
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
       },
+      {
+        source: '/',
+        destination: '/latinlock',
+        permanent: true, // true = 301 redirect, false = 302
+      },
     ];
   },
 };
