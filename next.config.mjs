@@ -9,6 +9,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        destination: 'https://stackorbithq.com/latinlock/:path*',
+        permanent: true,
+        has: [{ type: 'host', value: 'latinlock.stackorbithq.com' }],
+      },
+      {
         source: '/',
         destination: '/latinlock/blog',
         permanent: true,
