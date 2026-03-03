@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 
 export async function generateStaticParams() {
-  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const postsDir = path.join(process.cwd(), "app", "latinlock", "blog", "posts");
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".jsx"));
 
   const params = await Promise.all(
