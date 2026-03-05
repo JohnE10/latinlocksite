@@ -1,10 +1,12 @@
 // app/latinlock/latin-address-converter/page.tsx
+import BackButton from '@/components/BackButton';
 import AddressInputForm from '../../../components/AddressInputForm';
 import CTAButton from '../../../components/CTAButton';
 
 export default function HomePage() {
   return (
     <div className="py-6">
+      <BackButton />
       <h1 className="text-4xl font-bold text-gray-900 mb-6 text-center">
         Latin Address Converter
       </h1>

@@ -97,50 +97,6 @@ export async function POST(req: Request) {
       };
     }
 
-    // if (geocodedAddress) {
-    //   const judgment = await semanticJudge({
-    //     translatedAddress,
-    //     geocodedAddress,
-    //   });
-
-    //   // 4️⃣ Use Text Search (New) API if addresses don't match
-    //   if (!judgment.same_location) {
-    //     try {
-    //       const placesRes = await fetch(
-    //         'https://places.googleapis.com/v1/places:searchText',
-    //         {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //             'X-Goog-Api-Key': process.env.PLACES_API_KEY!,
-    //             'X-Goog-FieldMask': 'places.formattedAddress'
-    //           },
-    //           body: JSON.stringify({
-    //             textQuery: translatedAddress
-    //           })
-    //         }
-    //       );
-
-    //       if (!placesRes.ok) {
-    //         const errorText = await placesRes.text();
-    //         console.warn('Places API failed:', placesRes.status, errorText);
-    //         finalAddress = translatedAddress;
-    //       } else {
-    //         const placesJson = await placesRes.json();
-
-    //         finalAddress =
-    //           placesJson.places?.[0]?.formattedAddress ||
-    //           translatedAddress;
-    //       }
-    //     } catch (err) {
-    //       console.warn('Places API fetch error:', err);
-    //       finalAddress = translatedAddress;
-    //     }
-    //   }
-    // } else {
-    //   finalAddress = translatedAddress;
-    // }
-
     console.log('tbd address conversion:', {
       geocodedAddress,
       translatedAddress,
