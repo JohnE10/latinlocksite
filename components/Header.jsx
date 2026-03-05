@@ -18,11 +18,27 @@ export default function Header() {
           <h1 className="text-2xl font-bold text-gray-500">LatinLock</h1>
         </Link>
         <nav>
-          <ul className="flex space-x-[15px]">
+          {/* <ul className="flex space-x-[15px]"> */}
+          <ul className="flex space-x-[10px]">
+            <li>
+              <Link href="/latinlock/latin-address-converter" className="text-gray-600 hover:text-gray-900">
+                Address Converter
+              </Link>
+            </li>
+            <li>
+              <span className="text-gray-600 hover:text-gray-900">
+                |
+              </span>
+            </li>
             <li>
               <Link href="/latinlock/blog" className="text-gray-600 hover:text-gray-900">
                 Blog
               </Link>
+            </li>
+            <li>
+              <span className="text-gray-600 hover:text-gray-900">
+                |
+              </span>
             </li>
             <li>
               <Link href="/contact" className="text-gray-600 hover:text-gray-900">
