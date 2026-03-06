@@ -5,6 +5,7 @@ import { semanticJudge } from "@/lib/semanticJudge";
 import { placesApiAddress } from '@/lib/placeApiAddress';
 import { LRUCache } from 'lru-cache';
 
+// Rate limiting cache
 const rateLimitCache = new LRUCache<string, number>({
   max: 500,
   ttl: 60 * 1000, // 1 minute
@@ -16,6 +17,29 @@ function isRateLimited(ip: string): boolean {
   rateLimitCache.set(ip, count + 1);
   return false;
 }
+
+// In-memory AI cache
+const aiCache = new LRUCache<string, string>({
+  max: 1000, // store up to 1000 addresses
+  ttl: 24 * 60 * 60 * 1000, // 1 day
+});
+
+async function getTranslatedAddress(address: string): Promise<string> {
+  const cached = aiCache.get(address);
+
+  if (cached) {
+    return cached;
+  }
+
+  const translated = await translateAddress(address);
+
+  aiCache.set(address, translated);
+
+  return translated;
+}
+
+
+
 
 export async function POST(req: Request) {
   try {
@@ -39,7 +63,7 @@ export async function POST(req: Request) {
 
     // AI translation + Places API in parallel
     const [translatedAddress, placesRes] = await Promise.all([
-      translateAddress(address),
+      getTranslatedAddress(address),
       placesApiAddress(address),
     ]);
     let finalAddress = translatedAddress;
