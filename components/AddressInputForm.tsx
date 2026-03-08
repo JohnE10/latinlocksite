@@ -17,6 +17,7 @@ export default function AddressInputForm() {
   const [mapAddress, setMapAdress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [matchQuality, setMatchQuality] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,9 +39,10 @@ export default function AddressInputForm() {
         setError(data.error || "Conversion failed");
       }
       else {
-        setOutput(data.formatted_address);
+        setOutput(data.translatedAddress);
         setLocation(data.location);
         setMapAdress(data.mapAddress);
+        setMatchQuality(data.match_quality);
       }
 
 
@@ -77,16 +79,12 @@ export default function AddressInputForm() {
 
   function getLocationTypeExplanation(locationType: string): string {
     switch (locationType) {
-      case "ROOFTOP":
-        return "The map below is showing the exact location. This is very precise and points to the specific building or rooftop.";
-      case "RANGE_INTERPOLATED":
-        return "The map below is showing an estimated location along a street, based on nearby address data.";
-      case "GEOMETRIC_CENTER":
-        return "The map below is showing the center point of a larger area, like a city, region, or park.";
-      case "APPROXIMATE":
-        return "Approximate location: the result is a general estimate, used when the input is ambiguous.";
+      case "Exact Match":
+        return "Exact location: the result is a precise match to the input address.";
+      case "Approximate":
+        return "Approximate location: the result is a general estimate, used when no exact match is found.";
       default:
-        return `Location type: ${locationType}`;
+        return locationType && `Location type: ${locationType}`;
     }
   }
 
@@ -101,7 +99,7 @@ export default function AddressInputForm() {
           id="address"
           value={input}
           onChange={handleTextareaChange}
-          placeholder="Κωνσταντίνος Παπαδόπουλος, Ερμού 51, 105 63 ΑΘΗΝΑ, GREECE"
+          placeholder="Ερμού 51, 105 63 ΑΘΗΝΑ, GREECE"
           rows={2}
           required
           disabled={loading}
@@ -124,45 +122,29 @@ export default function AddressInputForm() {
         </div>
       )}
 
-      {location && (
+      {output && (
         <div className="mt-4">
           <h3 className="font-bold mb-2 text-[18px]">
-            {/* {getLocationTypeHeading(location.location_type)} - {location.location_type !== "ROOFTOP" && <span> No exact match found. </span>} */}
-            {location.location_type === "ROOFTOP" && <span>Google Maps Search:<span className='text-green-700'> Exact Match</span></span>}
-            {location.location_type !== "ROOFTOP" && <span>Google Maps Search:<span className='text-red-600'> No exact match found. </span></span>}
+
+            <span>Google Maps Search:</span>{matchQuality === "Exact Match" ? <span className='text-green-700'> Exact Match</span> : <span className='text-red-600'> No Exact Match Found</span>}
           </h3>
-          <p className="text-sm text-gray-600 mb-2">
-            {getLocationTypeExplanation(location.location_type)}
-          </p>
-          <iframe
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            loading="lazy"
-            allowFullScreen
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${location.geocodingSelectedAddress}&zoom=17`}
+          {!output.includes('Address not found') &&
+            <>
+              <p className="text-sm text-gray-600 mb-2">
+                {getLocationTypeExplanation(matchQuality)}
+              </p>
+              <iframe
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={`https://www.google.com/maps/embed/v1/search?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${output}&zoom=17`}
+              >
+              </iframe>
+            </>
+          }
 
-          ></iframe>
-        </div>
-      )}
-
-      {mapAddress && (
-        <div className="mt-4">
-          <h3 className="font-bold mb-2 text-[18px]">
-            Google Maps Search: <span className='text-green-700'>{getLocationTypeHeading('ROOFTOP')}</span>
-          </h3>
-          <p className="text-sm text-gray-600 mb-2">
-            {getLocationTypeExplanation('ROOFTOP')}
-          </p>
-          <iframe
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            loading="lazy"
-            allowFullScreen
-            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${mapAddress}&zoom=17`}
-
-          ></iframe>
         </div>
       )}
 
