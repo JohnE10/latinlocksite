@@ -29,6 +29,7 @@ async function getTranslatedAddress(address: string): Promise<string> {
   const cached = aiCache.get(address);
 
   if (cached) {
+    console.log('AI cache hit:', cached);
     return cached;
   }
 
@@ -59,11 +60,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Address too long" }, { status: 400 });
     }
 
-    // const result = await geocodeAddress(address);
-
     // AI translation + Places API in parallel
     const [translatedAddress, result] = await Promise.all([
-      translateAddress(address),
+      // translateAddress(address),
+      getTranslatedAddress(address),
       geocodeAddress(address),
     ]);
 
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
           englishAddress
         );
 
-        console.log('tbd convert-address vars:', { semanticJudgeRes, translatedAddress, englishAddress });
+        console.log('tbd convert-address vars:', { matchQuality: result.matchQuality, semanticJudgeRes, translatedAddress, englishAddress });
 
         if (semanticJudgeRes) {
           return NextResponse.json({
@@ -94,12 +94,11 @@ export async function POST(req: Request) {
         }
         else {
           const result2 = await geocodeAddress(translatedAddress);
-          console.log('tbd result2:', result2);
           if (result2) {
             const englishAddress2 = result2.englishAddress;
             const semanticJudgeRes2 = await semanticJudge(
               translatedAddress,
-              englishAddress
+              englishAddress2
             );
 
             if (semanticJudgeRes2) {
@@ -110,6 +109,8 @@ export async function POST(req: Request) {
                 location_type: result2.locationType,   // "ROOFTOP", "RANGE_INTERPOLATED", etc.
               });
             }
+          console.log('tbd route vars2:', {matchQuality: result2.matchQuality, translatedAddress, semanticJudgeRes2, result2});
+
           }
         }
       }

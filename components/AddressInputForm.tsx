@@ -25,6 +25,7 @@ export default function AddressInputForm() {
     setError(null);
     setOutput(null);
     setLocation(null);
+    setMatchQuality(null);
 
     try {
       const res = await fetch("/api/convert-address", {
@@ -82,11 +83,13 @@ export default function AddressInputForm() {
       case "Exact Match":
         return "Exact location: the result is a precise match to the input address.";
       case "Approximate":
-        return "Approximate location: the result is a general estimate, used when no exact match is found.";
+        return "Approximate location: this map search result is a general estimate, used when the software cannot determine if Google found an exact match for the converted address.";
       default:
         return locationType && `Location type: ${locationType}`;
     }
   }
+
+  console.log('tbd getLocationTypeExplanation(matchQuality):', getLocationTypeExplanation(matchQuality));
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-md max-w-lg mx-auto">
@@ -117,7 +120,19 @@ export default function AddressInputForm() {
 
       {output && (
         <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded">
-          <strong>Converted Address:</strong>
+          <div className="flex items-center justify-between">
+            <strong>Converted Address:</strong>
+            <button
+              onClick={() => navigator.clipboard.writeText(output)}
+              title="Copy address"
+              className="text-blue-600 hover:text-blue-800 border border-blue-300 rounded p-1 cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </div>
           <p>{output}</p>
         </div>
       )}
@@ -139,7 +154,7 @@ export default function AddressInputForm() {
                 style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                src={`https://www.google.com/maps/embed/v1/search?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${output}&zoom=17`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${output}&zoom=17`}
               >
               </iframe>
             </>
