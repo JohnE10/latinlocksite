@@ -12,12 +12,12 @@ export async function translateAddress(address: string): Promise<string> {
   //     text: `Check if this address exists, and if it does, return its latin-character version. Do not include any conversational text or explanations—only the latin-characters address in standard address format, in one line with no line breaks.
 
   //     Use standard, translated English names for major city names. Do not transliterate major city names.
-        
+
   //     If the address doesn't exist, return "Address not found".`
   //   }]
   // };
 
-    // We move the core logic to the system instruction to force translation
+  // We move the core logic to the system instruction to force translation
   const systemInstruction = {
     parts: [{
       text: `You are an international address formatting engine. 
@@ -26,6 +26,7 @@ export async function translateAddress(address: string): Promise<string> {
     1. LOCAL NAMES: Phonetically transliterate names of streets, districts, or buildings. (Example: 'Αθηνάς' -> 'Athinas', NOT 'Athena').
     2. ROAD TYPES: Translate road types to English. (Example: 'Οδός' -> 'Street', 'ул.' -> 'Street').
     3. GEOGRAPHY: Translate Cities and Countries to their standard English names. (Example: 'Αθήνα' -> 'Athens', 'Ελλάδα' -> 'Greece', 'Москва' -> 'Moscow').
+    4. output the address in its entirety, do not truncate any part of the address.
     
     Output ONLY the final processed address.`
     }]
