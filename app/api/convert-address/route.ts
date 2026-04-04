@@ -25,7 +25,9 @@ const aiCache = new LRUCache<string, string>({
   ttl: 24 * 60 * 60 * 1000, // 1 day
 });
 
+// check if address is cached, if not then translate
 async function getTranslatedAddress(address: string): Promise<string> {
+
   const cached = aiCache.get(address);
 
   if (cached) {
@@ -62,65 +64,14 @@ export async function POST(req: Request) {
 
     // AI translation + Places API in parallel
     const [translatedAddress, result] = await Promise.all([
-      // translateAddress(address),
       getTranslatedAddress(address),
-      geocodeAddress(address),
+      placesApiAddress(address),
     ]);
 
-    if (result === null) {
-      return NextResponse.json({
-        formatted_address: "Address Not Found",
-        match_quality: null,
-        location_type: null,
-      });
-    } else {
-      const englishAddress = result.englishAddress;
-      // semantic judgment
-      if (translatedAddress && englishAddress) {
-        const semanticJudgeRes = await semanticJudge(
-          translatedAddress,
-          englishAddress
-        );
-
-        console.log('tbd convert-address vars:', { matchQuality: result.matchQuality, semanticJudgeRes, translatedAddress, englishAddress });
-
-        if (semanticJudgeRes) {
-          return NextResponse.json({
-            translatedAddress,
-            formatted_address: englishAddress,
-            match_quality: result.matchQuality,   // "Exact Match" or "Approximate"
-            location_type: result.locationType,   // "ROOFTOP", "RANGE_INTERPOLATED", etc.
-          });
-        }
-        else {
-          const result2 = await geocodeAddress(translatedAddress);
-          if (result2) {
-            const englishAddress2 = result2.englishAddress;
-            const semanticJudgeRes2 = await semanticJudge(
-              translatedAddress,
-              englishAddress2
-            );
-
-            if (semanticJudgeRes2) {
-              return NextResponse.json({
-                translatedAddress,
-                formatted_address: englishAddress2,
-                match_quality: result2.matchQuality,   // "Exact Match" or "Approximate"
-                location_type: result2.locationType,   // "ROOFTOP", "RANGE_INTERPOLATED", etc.
-              });
-            }
-          console.log('tbd route vars2:', {matchQuality: result2.matchQuality, translatedAddress, semanticJudgeRes2, result2});
-
-          }
-        }
-      }
-      return NextResponse.json({
-        translatedAddress,
-        formatted_address: translatedAddress,
-        match_quality: null,
-        location_type: null,
-      });
-    }
+    return NextResponse.json({
+      translatedAddress,
+      placesApiResult: result ?? null,
+    });
 
   } catch (err) {
     console.error(err);

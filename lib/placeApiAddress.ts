@@ -11,7 +11,10 @@ export async function placesApiAddress(address: string) {
                     'X-Goog-Api-Key': process.env.PLACES_API_KEY!,
                     'X-Goog-FieldMask': 'places.id,places.types'
                 },
-                body: JSON.stringify({ textQuery: address })
+                body: JSON.stringify({ 
+                    textQuery: address, 
+                    languageCode: "en", 
+                })
             }
         );
 

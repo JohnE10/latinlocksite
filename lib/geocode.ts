@@ -50,8 +50,6 @@ export async function geocodeAddress(address: string): Promise<GeocodeResult | n
 
     const data = await response.json();
 
-    console.log('tbd data:', JSON.stringify(data, null, 2));
-
     // ZERO_RESULTS means the address was not found
     if (data.status === "ZERO_RESULTS" || !data.results || data.results.length === 0) {
         return null;
