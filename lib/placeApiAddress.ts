@@ -1,4 +1,21 @@
 // lib/placeApiAddress.ts
+
+/**
+ * Normalizes a string by removing diacritics (macrons, accents, etc.)
+ * and converting it to standard ASCII-friendly Latin characters.
+ * Example: "5-chōme-2-1 Ginza" -> "5-chome-2-1 Ginza"
+ */
+function normalizeAddress(address: string): string {
+    return address
+        // 1. Decompose characters into base letter + combining mark (NFD)
+        // e.g., 'ō' becomes 'o' + combining macron
+        .normalize('NFD')
+        // 2. Remove all characters in the Unicode "Mark" category (diacritics)
+        .replace(/\p{M}/gu, "")
+        // 3. Re-normalize to NFC for clean output
+        .normalize('NFC');
+}
+
 export async function placesApiAddress(address: string) {
     try {
         // Step 1: Find the Place ID
@@ -11,9 +28,9 @@ export async function placesApiAddress(address: string) {
                     'X-Goog-Api-Key': process.env.PLACES_API_KEY!,
                     'X-Goog-FieldMask': 'places.id,places.types'
                 },
-                body: JSON.stringify({ 
-                    textQuery: address, 
-                    languageCode: "en", 
+                body: JSON.stringify({
+                    textQuery: address,
+                    languageCode: "en",
                 })
             }
         );
@@ -56,7 +73,8 @@ export async function placesApiAddress(address: string) {
             throw new Error("Address found, but 'formattedAddress' field is missing in response.");
         }
 
-        return detailsData.formattedAddress;
+        // Normalize diacritics so carriers receive clean ASCII-friendly Latin text
+        return normalizeAddress(detailsData.formattedAddress);
 
     } catch (error) {
         // Centralized error logging

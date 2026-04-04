@@ -6,14 +6,28 @@ export async function translateAddress(address: string): Promise<string> {
 
   const apiKey = process.env.GEMINI_API_KEY;
 
-  // We move the core logic to the system instruction to force translation
+  // // We move the core logic to the system instruction to force translation
+  // const systemInstruction = {
+  //   parts: [{
+  //     text: `Check if this address exists, and if it does, return its latin-character version. Do not include any conversational text or explanations—only the latin-characters address in standard address format, in one line with no line breaks.
+
+  //     Use standard, translated English names for major city names. Do not transliterate major city names.
+        
+  //     If the address doesn't exist, return "Address not found".`
+  //   }]
+  // };
+
+    // We move the core logic to the system instruction to force translation
   const systemInstruction = {
     parts: [{
-      text: `Check if this address exists, and if it does, return its latin-character version. Do not include any conversational text or explanations—only the latin-characters address in standard address format, in one line with no line breaks.
+      text: `You are an international address formatting engine. 
+    Follow these specific rules for 'English' conversion:
 
-      Use standard, translated English names for major city names. Do not transliterate major city names.
-        
-      If the address doesn't exist, return "Address not found".`
+    1. LOCAL NAMES: Phonetically transliterate names of streets, districts, or buildings. (Example: 'Αθηνάς' -> 'Athinas', NOT 'Athena').
+    2. ROAD TYPES: Translate road types to English. (Example: 'Οδός' -> 'Street', 'ул.' -> 'Street').
+    3. GEOGRAPHY: Translate Cities and Countries to their standard English names. (Example: 'Αθήνα' -> 'Athens', 'Ελλάδα' -> 'Greece', 'Москва' -> 'Moscow').
+    
+    Output ONLY the final processed address.`
     }]
   };
 
