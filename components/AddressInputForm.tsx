@@ -176,7 +176,7 @@ export default function AddressInputForm() {
             </iframe>
           </div>
         ) : output && !output.includes('Address not found') ? (
-          <div>
+          <div className="mt-4">
             <h3 className="font-bold mb-2 text-[18px]">
               <span>Closest address found on Google:</span>
             </h3>
