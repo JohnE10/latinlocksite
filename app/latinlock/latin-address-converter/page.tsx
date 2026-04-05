@@ -5,8 +5,8 @@ import CTAButton from '../../../components/CTAButton';
 
 export default function HomePage() {
   return (
-    <div className="py-3 mx-auto w-full">
-      <div className='ps-6'>
+    <div className="mx-auto w-full">
+      <div>
         <BackButton />
       </div>
 
@@ -15,16 +15,16 @@ export default function HomePage() {
       </h1>
 
       {/* Two-column layout on desktop; stacks on mobile */}
-      <div className="flex flex-col md:flex-row w-[90%] justify-between p-6 [@media(min-width:750px)]:w-[100%] mx-auto gap-6 items-start">
+      <div className="flex flex-col md:flex-row w-[90%] justify-between [@media(min-width:750px)]:w-[100%] mx-auto gap-6 mt-12 items-start">
 
         {/* left column: input form + CTA */}
-        <div className="md:w-1/2 flex flex-col items-center md:items-center w-full">
+        <div className="md:w-1/2 flex flex-col items-center md:items-center w-full p-4">
           <div className='text-gray-500'>
             <p className="mb-4 font-medium">
-              Struggling with international orders? Non-Latin characters—like Arabic, Chinese, or Cyrillic—can break fulfillment.
+              Struggling with international orders? Non-Latin characters—like Greek, Chinese, or Cyrillic—can break fulfillment.
             </p>
             <p className="mb-4">
-              Paste any shipping address to the right (or below if on a mobile device), and we'll automatically convert it to Latin/Roman characters.
+              Paste any shipping address below, and we'll automatically convert it to Latin/Roman characters.
             </p>
           </div>
 
