@@ -18,8 +18,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} flex flex-col min-h-screen bg-gray-50`}>
         <GA4 />
         <Header />
-        {/* <main className="flex-grow container">{children}</main> */}
-        <main className="flex-grow w-full">{children}</main>
+        <main className="flex-grow container">{children}</main>
         <Footer />
       </body>
     </html>
