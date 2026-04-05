@@ -88,10 +88,10 @@ export default function AddressInputForm() {
   }
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md max-w-lg mx-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div className="p-4 bg-white rounded-lg shadow-md mx-auto w-full">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <label htmlFor="address" className="font-semibold">
-          Enter Address (any language):
+          Enter Address (any script):
         </label>
 
         <textarea
@@ -102,7 +102,7 @@ export default function AddressInputForm() {
           rows={2}
           required
           disabled={loading}
-          className="border rounded px-3 py-2 resize-none overflow-hidden"
+          className="w-full border rounded px-3 py-2 resize-none overflow-hidden"
         />
 
         <button

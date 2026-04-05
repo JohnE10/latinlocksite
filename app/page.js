@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="w-[600px] mx-auto px-4 py-8">
       {/* Hero Section */}
       <section className="text-center py-1">
         {/* <h1 className="text-4xl font-bold text-gray-900 mb-4">
