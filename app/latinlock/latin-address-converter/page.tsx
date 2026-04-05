@@ -2,6 +2,7 @@
 import BackButton from '@/components/BackButton';
 import AddressInputForm from '../../../components/AddressInputForm';
 import CTAButton from '../../../components/CTAButton';
+import Disclaimer from '@/components/Disclaimer';
 
 export default function HomePage() {
   return (
@@ -56,12 +57,14 @@ export default function HomePage() {
               </a>
             </p>
             <p className="mb-4 w-full">
-              The safest address to ship to is the one your customer enters him or herself, in Latin/Roman Characters.
+              The safest address to ship to is the one your customer enters themselves using Latin characters. LatinLock ensures this at checkout.
             </p>
           </div>
 
         </div>
       </div>
+
+      <Disclaimer />
     </div>
   );
 }
