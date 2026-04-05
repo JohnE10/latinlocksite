@@ -30,6 +30,8 @@ export default function HomePage() {
           </div>
 
           <AddressInputForm />
+
+          <Disclaimer />
         </div>
 
         {/* right column: marketing copy */}
@@ -63,8 +65,6 @@ export default function HomePage() {
 
         </div>
       </div>
-
-      <Disclaimer />
     </div>
   );
 }
