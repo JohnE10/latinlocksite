@@ -52,15 +52,9 @@ export async function translateAddress(address: string): Promise<string> {
             parts: [{ text: address }]
           }
         ],
-        // THIS ENABLES GOOGLE MAPS GROUNDING
-        tools: [
-          {
-            google_maps: {}
-          }
-        ],
         generationConfig: {
           temperature: 0,
-          maxOutputTokens: 500,
+          maxOutputTokens: 1024,
         },
       }),
     }
@@ -84,6 +78,8 @@ export async function translateAddress(address: string): Promise<string> {
   else if (aiText === "ADDRESS_NOT_FOUND") {
     throw new Error("Address not found");
   }
+
+  console.log('tbd AI:', aiText);
 
   return aiText;
 }
