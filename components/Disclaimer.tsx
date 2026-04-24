@@ -8,7 +8,7 @@ export default function Disclaimer() {
 
             </p>
             <p>
-                The most reliable approach is having customers enter addresses in Latin characters at checkout, reducing errors and failed deliveries. LatinLock helps enforce this automatically for Shopify stores.
+                The most reliable approach is to prompt customers to enter their address in Latin characters at checkout, reducing errors and failed deliveries. LatinLock enforces this automatically for Shopify stores.
 
             </p>
         </div>
