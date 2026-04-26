@@ -25,7 +25,8 @@ export default function HomePage() {
               Struggling with international orders? Non-Latin characters—like Greek, Chinese, or Cyrillic—can break fulfillment.
             </p>
             <p className="mb-4">
-              Paste any shipping address below, and we'll automatically convert it to Latin/Roman characters.
+              {/* Added: escaped apostrophe to satisfy react/no-unescaped-entities lint rule. */}
+              Paste any shipping address below, and we&apos;ll automatically convert it to Latin/Roman characters.
             </p>
           </div>
 
