@@ -1,4 +1,20 @@
 // lib/translateAddress.ts
+
+// Added: centralized timeout value for upstream AI requests.
+const GEMINI_TIMEOUT_MS = 10_000;
+
+// Added: fetch helper with AbortController timeout for production reliability.
+async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: number): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export async function translateAddress(address: string): Promise<string> {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error("GEMINI_API_KEY not set - Get one from https://aistudio.google.com/app/apikey");
@@ -38,7 +54,7 @@ export async function translateAddress(address: string): Promise<string> {
     }]
   };
 
-  const res = await fetch(
+  const res = await fetchWithTimeout(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
     {
       method: "POST",
@@ -57,7 +73,8 @@ export async function translateAddress(address: string): Promise<string> {
           maxOutputTokens: 1024,
         },
       }),
-    }
+    },
+    GEMINI_TIMEOUT_MS
   );
 
   if (!res.ok) {
@@ -75,11 +92,9 @@ export async function translateAddress(address: string): Promise<string> {
     console.error("Gemini response missing expected text:", json);
     throw new Error("Gemini translation failed");
   }
-  else if (aiText === "ADDRESS_NOT_FOUND") {
+  else if (aiText.toLowerCase() === "address not found") {
     throw new Error("Address not found");
   }
-
-  console.log('tbd AI:', aiText);
 
   return aiText;
 }

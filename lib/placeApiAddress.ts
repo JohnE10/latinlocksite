@@ -1,5 +1,21 @@
 // lib/placeApiAddress.ts
 
+// Added: timeout constants to avoid hanging requests to upstream Places API.
+const PLACES_SEARCH_TIMEOUT_MS = 8_000;
+const PLACES_DETAILS_TIMEOUT_MS = 8_000;
+
+// Added: fetch helper with AbortController timeout for production reliability.
+async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: number): Promise<Response> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+        return await fetch(url, { ...init, signal: controller.signal });
+    } finally {
+        clearTimeout(timeout);
+    }
+}
+
 /**
  * Normalizes a string by removing diacritics (macrons, accents, etc.)
  * and converting it to standard ASCII-friendly Latin characters.
@@ -20,33 +36,37 @@ function normalizeAddress(address: string): string {
 // common symbols (digits, punctuation), or inherited combining marks.
 // Constructed via new RegExp() to bypass TypeScript's limited Unicode property
 // support — the pattern is valid JS and runs correctly at runtime.
-// @ts-ignore
 
 // Matches characters from non-Latin scripts using explicit Unicode ranges.
 // Covers all scripts likely to appear in international shipping addresses.
 const nonLatinScriptPattern = /[\u0530-\u058F\u0590-\u05FF\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u0900-\u097F\u0980-\u09FF\u0A00-\u0A7F\u0A80-\u0AFF\u0B00-\u0B7F\u0B80-\u0BFF\u0C00-\u0C7F\u0C80-\u0CFF\u0D00-\u0D7F\u0D80-\u0DFF\u0E00-\u0E7F\u0E80-\u0EFF\u0F00-\u0FFF\u1000-\u109F\u10A0-\u10FF\u1100-\u11FF\u1200-\u137F\u1780-\u17FF\u1800-\u18AF\u3040-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uA000-\uA48F\uA500-\uA63F\uAC00-\uD7AF\u0400-\u04FF]/;
 
 function containsNonLatinScript(text: string): boolean {
-  return nonLatinScriptPattern.test(text);
+    return nonLatinScriptPattern.test(text);
 }
 
 export async function placesApiAddress(address: string) {
     try {
+        if (!process.env.PLACES_API_KEY) {
+            throw new Error("PLACES_API_KEY is not set");
+        }
+
         // Step 1: Find the Place ID
-        const searchRes = await fetch(
+        const searchRes = await fetchWithTimeout(
             'https://places.googleapis.com/v1/places:searchText',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': process.env.PLACES_API_KEY!,
+                    'X-Goog-Api-Key': process.env.PLACES_API_KEY,
                     'X-Goog-FieldMask': 'places.id,places.types'
                 },
                 body: JSON.stringify({
                     textQuery: address,
                     languageCode: "en",
                 })
-            }
+            },
+            PLACES_SEARCH_TIMEOUT_MS
         );
 
         // Check for HTTP errors (401, 403, 429, etc.)
@@ -65,15 +85,16 @@ export async function placesApiAddress(address: string) {
         }
 
         // Step 2: Get the Details
-        const detailsRes = await fetch(
+        const detailsRes = await fetchWithTimeout(
             `https://places.googleapis.com/v1/places/${placeId}`,
             {
                 method: 'GET',
                 headers: {
-                    'X-Goog-Api-Key': process.env.PLACES_API_KEY!,
+                    'X-Goog-Api-Key': process.env.PLACES_API_KEY,
                     'X-Goog-FieldMask': 'formattedAddress,addressComponents'
                 }
-            }
+            },
+            PLACES_DETAILS_TIMEOUT_MS
         );
 
         if (!detailsRes.ok) {

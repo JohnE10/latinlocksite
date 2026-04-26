@@ -1,24 +1,35 @@
 // components/AddressInputForm.tsx
 "use client";
 
-import { translateAddress } from '@/lib/translateAddress';
 import { useState } from "react";
 
-type LocationData = {
-  lat: number;
-  lng: number;
-  location_type: string;
-  geocodingSelectedAddress: string;
-};
+// Added: client-side free-tier guard for obvious multi-address input.
+function hasMultipleAddresses(raw: string): boolean {
+  const nonEmptyLines = raw
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  // Multiple non-empty lines is treated as multiple addresses.
+  if (nonEmptyLines.length > 1) return true;
+
+  const compact = raw.replace(/\s+/g, " ").trim();
+
+  // Added: detect multiple postal-code groups in one line (common when users paste two addresses).
+  const postalCodeMatches = compact.match(/\b\d{3,6}(?:\s\d{2,4})?\b/g) ?? [];
+
+  // Added: require multiple commas as a second signal to reduce false positives.
+  const commaCount = (compact.match(/,/g) ?? []).length;
+
+  return postalCodeMatches.length > 1 && commaCount >= 2;
+}
 
 export default function AddressInputForm() {
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string | null>(null);
-  const [location, setLocation] = useState<LocationData | null>(null);
   const [mapAddress, setMapAddress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [matchQuality, setMatchQuality] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
@@ -27,6 +38,13 @@ export default function AddressInputForm() {
     setError(null);
     setOutput(null);
     setMapAddress(null);
+
+    // Added: short-circuit before network call when user pasted multiple lines.
+    if (hasMultipleAddresses(input)) {
+      setError("Please enter one address only (free version).");
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch("/api/convert-address", {
@@ -38,8 +56,9 @@ export default function AddressInputForm() {
       const data = await res.json();
 
       if (!res.ok) {
+        // Added: return early on API errors so stale/invalid data is not rendered.
         setError(data.error || "Conversion failed");
-        // return;
+        return;
       }
 
       setOutput(data?.translatedAddress);
@@ -61,32 +80,6 @@ export default function AddressInputForm() {
     setInput(el.value);
   }
 
-  function getLocationTypeHeading(locationType: string): string {
-    switch (locationType) {
-      case "ROOFTOP":
-        return "Exact Match";
-      case "RANGE_INTERPOLATED":
-        return "Approximate Location (Interpolated)";
-      case "GEOMETRIC_CENTER":
-        return "Geometric Center";
-      case "APPROXIMATE":
-        return "Approximate Location";
-      default:
-        return `Location (${locationType})`;
-    }
-  }
-
-  function getLocationTypeExplanation(locationType: string): string {
-    switch (locationType) {
-      case "Exact Match":
-        return "Exact location: the result is a precise match to the input address.";
-      case "Approximate":
-        return "Approximate location: this map search result is a general estimate, used when the software cannot determine if Google found an exact match for the converted address.";
-      default:
-        return locationType && `Location type: ${locationType}`;
-    }
-  }
-
   return (
     <div className="p-4 bg-white rounded-lg shadow-md mx-auto w-full">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
@@ -104,6 +97,8 @@ export default function AddressInputForm() {
           disabled={loading}
           className="w-full border rounded px-3 py-2 resize-none overflow-hidden"
         />
+
+        <p className="text-sm text-gray-500">Free version supports one address at a time.</p>
 
         <button
           type="submit"

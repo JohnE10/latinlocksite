@@ -7,6 +7,46 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  // Added: baseline security headers for production hardening.
+  async headers() {
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    const commonSecurityHeaders = [
+      {
+        key: 'X-Content-Type-Options',
+        value: 'nosniff',
+      },
+      {
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin',
+      },
+      {
+        key: 'X-Frame-Options',
+        value: 'SAMEORIGIN',
+      },
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=()'
+      },
+      // HSTS is added ONLY in production
+      ...(isProduction
+        ? [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+        ]
+        : []),
+    ];
+
+    return [
+      {
+        source: '/:path*',
+        headers: commonSecurityHeaders,
+      },
+    ];
+  },
+
   async redirects() {
     return [
       {
