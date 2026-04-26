@@ -100,6 +100,19 @@ export default function AddressInputForm() {
 
         <p className="text-sm text-gray-500">Free version supports one address at a time.</p>
 
+        {/* Added: monetization/waitlist note so users know paid batch/API options are coming. */}
+        <div className="text-sm bg-blue-50 border border-blue-200 rounded p-3 text-blue-900">
+          <p>
+            Need to convert multiple addresses or use an API? Paid batch mode and API access are coming soon.
+          </p>
+          <a
+            href="/contact"
+            className="inline-block mt-2 font-medium underline hover:no-underline"
+          >
+            Contact us for early-access
+          </a>
+        </div>
+
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
@@ -166,7 +179,8 @@ export default function AddressInputForm() {
               style={{ border: 0 }}
               loading="lazy"
               allowFullScreen
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${mapAddress}&zoom=17`}
+              // Added: URL-encode mapAddress to prevent malformed query strings for spaces/special characters.
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API}&q=${encodeURIComponent(mapAddress)}&zoom=17`}
             >
             </iframe>
           </div>

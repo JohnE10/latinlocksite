@@ -60,7 +60,7 @@ export default function HomePage() {
               </a>
             </p>
             <p className="mb-4 w-full">
-              The safest address to ship to is the one your customer enters themselves using Latin characters. LatinLock ensures this at checkout.
+              The safest address to ship to is the one your customer enters themselves in Latin characters. LatinLock automatically ensures this at checkout.
             </p>
           </div>
 
