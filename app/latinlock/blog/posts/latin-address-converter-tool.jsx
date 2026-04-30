@@ -1,4 +1,4 @@
-// app/latinlock/blog/posts/non-latin-shipping-address-problem.jsx
+// app/latinlock/blog/posts/latin-address-converter-tool.jsx
 import Image from "next/image";
 import Link from "next/link";
 
