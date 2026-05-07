@@ -47,7 +47,7 @@ export default function Post() {
             </p>
 
             <p className="my-4">
-                <strong>Manually editing orders after the fact:</strong> This is what most merchants end up doing. They go through the orders for the day, inspect the address for each order, and if they see non-Latin characters, they'll either contact the customer and request a corrected address, or use a transliteration tool and manually convert the address.
+                <strong>Manually editing orders after the fact:</strong> This is what most merchants end up doing. They go through the orders for the day, inspect the address for each order, and if they see non-Latin characters, they'll either contact the customer and request a corrected address, or use a transliteration tool like the free <a href='/latinlock/latin-address-converter' style={{ color: "#0000FF" }}>Latin Address Converter</a> to manually convert the address.
             </p>
 
             <p className="my-4">
