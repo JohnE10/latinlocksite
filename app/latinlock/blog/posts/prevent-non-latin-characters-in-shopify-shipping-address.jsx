@@ -6,7 +6,8 @@ import Image from "next/image";
 export const metadata = {
   title: "Prevent Non-Latin Characters in Shopify Shipping Addresses",
   slug: "prevent-non-latin-characters-in-shopify-shipping-address",
-  description: "",
+  // Added SEO description for article metadata.
+  description: "Learn how Shopify merchants can prevent non-Latin characters in shipping addresses before checkout issues reach fulfillment.",
   date: "2025-08-1",
   author: "LatinLock",
   thumbnail: "/images/latinlock.jpg",

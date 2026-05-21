@@ -3,6 +3,8 @@ import Link from "next/link";
 
 export const metadata = {
     title: "Why Non-Latin Characters in Shopify Shipping Addresses Cause Carrier Errors and Fulfillment Failures",
+    // Added SEO description for article metadata.
+    description: "Learn why non-Latin characters in Shopify shipping addresses can cause carrier errors, fulfillment failures, delays, and rejected labels.",
     date: "2026-04-30",
     slug: "why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures",
     tags: ["Shopify", "shipping", "non-Latin", "checkout validation", "fulfillment"],

@@ -4,6 +4,8 @@ import Link from "next/link";
 
 export const metadata = {
     title: "E-commerce Shipping Trends in 2025 — What Shopify Merchants Need to Know",
+    // Added SEO description for article metadata.
+    description: "Review key e-commerce shipping trends for Shopify merchants, including automation, last-mile delivery, carrier expectations, and fulfillment planning.",
     date: "2025-09-09",
     slug: "ecommerce-shipping-trends-2025",
     tags: ["e-commerce", "shipping", "Shopify", "logistics", "2025"],

@@ -5,6 +5,8 @@ export const metadata = {
   slug: "checkout-mistakes-cost-shopify-sales",
   date: "2025-08-15",
   title: "5 Common Checkout Mistakes That Cost Shopify Stores Sales",
+  // Added SEO description for article metadata.
+  description: "Avoid checkout mistakes that cost Shopify stores sales, including shipping address issues, hidden costs, and poor validation.",
   excerpt: "Discover five frequent checkout mistakes that silently kill conversions.",
   thumbnail: "/images/latinlock7.png"
 };

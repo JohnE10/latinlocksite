@@ -4,6 +4,15 @@ import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
 
+export const metadata = {
+  title: 'LatinLock Blog',
+  description: 'Shopify checkout and shipping address guidance for preventing fulfillment issues with non-Latin characters.',
+  // Added canonical metadata for the blog index page.
+  alternates: {
+    canonical: 'https://stackorbithq.com/latinlock/blog',
+  },
+};
+
 export default async function BlogPage() {
   const postsDir = path.join(process.cwd(), 'app', 'latinlock', 'blog', 'posts');
 
