@@ -161,7 +161,7 @@ export default function Home() {
           Explore our blog for tips on optimizing your Shopify store and mastering checkout challenges.
         </p>
         <Link
-          href="/blog"
+          href="/latinlock/blog"
           className="inline-block bg-gray-200 text-gray-900 font-semibold py-3 px-6 rounded-lg hover:bg-gray-300 transition"
         >
           Visit Our Blog

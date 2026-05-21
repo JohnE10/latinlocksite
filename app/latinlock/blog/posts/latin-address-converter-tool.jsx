@@ -4,6 +4,8 @@ import Link from "next/link";
 
 export const metadata = {
     title: "When Non-Latin Shipping Addresses Get Rejected — And How to Fix It with AI",
+    // Added SEO description for article metadata.
+    description: "Learn why non-Latin shipping addresses can be rejected by carriers and how an AI-powered Latin address converter can help merchants fix them.",
     date: "2026-03-05",
     slug: "non-latin-shipping-address-problem",
     tags: ["e-commerce", "shipping", "international", "Shopify", "logistics", "AI"],
@@ -18,7 +20,7 @@ export default function Post() {
             </h1>
 
             <p className='my-4'>
-                For e-commerce merchants whose orders are getting rejected by international shipping carriers due to non-Latin/non-Roman characters (see <Link href='/latinlock/blog/non-latin-addresses-carrier-issues' className='text-blue-600 underline hover:text-blue-800 italic'>Why Many Carriers Still Reject Non-Latin Characters in Shipping Addresses</Link>), this <Link href='/latinlock/latin-address-converter' className='text-blue-600 underline hover:text-blue-800'>Latin address converter</Link> tool can automatically replace invalid characters with their Latin equivalents, reducing errors and unhappy customers.
+                For e-commerce merchants whose orders are getting rejected by international shipping carriers due to non-Latin/non-Roman characters (see <Link href='/latinlock/blog/non-latin-shipping-address-problem' className='text-blue-600 underline hover:text-blue-800 italic'>Why Many Carriers Still Reject Non-Latin Characters in Shipping Addresses</Link>), this <Link href='/latinlock/latin-address-converter' className='text-blue-600 underline hover:text-blue-800'>Latin address converter</Link> tool can automatically replace invalid characters with their Latin equivalents, reducing errors and unhappy customers.
             </p>
 
             <div className="flex justify-center my-6 py-[40px]">

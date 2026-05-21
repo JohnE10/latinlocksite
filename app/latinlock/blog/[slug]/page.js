@@ -34,12 +34,20 @@ export async function generateMetadata({ params: rawParams }) {
     const mod = await import(`../posts/${file}`);
     const meta = mod.metadata;
     if (meta?.slug === slug) {
+      const url = `https://stackorbithq.com/latinlock/blog/${slug}`;
+      const description = meta.description || meta.title;
+
       return {
         title: meta.title,
-        description: meta.description,
+        description,
+        // Added canonical metadata so Google can identify the preferred blog URL.
+        alternates: {
+          canonical: url,
+        },
         openGraph: {
           title: meta.title,
-          description: meta.description,
+          description,
+          url,
           type: "article",
         },
       };
@@ -78,5 +86,4 @@ export default async function BlogPostPage({ params: rawParams }) {
     </main>
   );
 }
-
 

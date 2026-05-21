@@ -78,10 +78,16 @@ const nextConfig = {
       },
       {
         source: '/non-latin-addresses-carrier-issues',
-        destination: '/latinlock/blog/non-latin-addresses-carrier-issues',
+        destination: '/latinlock/blog/non-latin-shipping-address-problem',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
+      },
+      // Added redirect for the old broken primary-domain blog slug.
+      {
+        source: '/latinlock/blog/non-latin-addresses-carrier-issues',
+        destination: '/latinlock/blog/non-latin-shipping-address-problem',
+        permanent: true,
       },
       {
         source: '/prevent-non-latin-characters-in-shopify-shipping-address',
