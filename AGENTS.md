@@ -29,3 +29,10 @@
 ## General Principle
 
 - Prioritize precision and minimal impact over refactoring or improvements.
+
+## Verification
+
+- Do not run verification checks automatically after each change.
+- Only run tests, typecheck, lint, builds, or other verification commands when explicitly requested.
+- Before production or deployment, ask before running the full relevant verification flow.
+- If verification is skipped, mention that it was skipped by preference.
