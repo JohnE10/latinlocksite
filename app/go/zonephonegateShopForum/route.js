@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const ZONEPHONEGATE_SHOP_FORUM_DESTINATION_URL = 'https://youtu.be/LhyGZIZAQcY';
+const ZONEPHONEGATE_SHOP_FORUM_DESTINATION_URL = 'https://youtu.be/7YRITNaQtY8';
 const GA_MEASUREMENT_ID = 'G-282VT6K98Y';
 
 // This GET handler creates `/go/zonephonegateShopForum` for Shopify Forum video click tracking.
