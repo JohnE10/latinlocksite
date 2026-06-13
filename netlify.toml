@@ -1,29 +1,32 @@
-[[redirects]]
-  from = "https://latinlockblog.stackorbithq.com/"
-  to = "https://latinlock.stackorbithq.com/blog"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://latinlockblog.stackorbithq.com/ecommerce-shipping-trends-2025"
-  to = "https://latinlock.stackorbithq.com/blog/ecommerce-shipping-trends-2025"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://latinlockblog.stackorbithq.com/checkout-mistakes-cost-shopify-sales"
-  to = "https://latinlock.stackorbithq.com/blog/checkout-mistakes-cost-shopify-sales"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://latinlockblog.stackorbithq.com/non-latin-addresses-carrier-issues"
-  to = "https://latinlock.stackorbithq.com/blog/non-latin-addresses-carrier-issues"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://latinlockblog.stackorbithq.com/prevent-non-latin-characters-in-shopify-shipping-address"
-  to = "https://latinlock.stackorbithq.com/blog/prevent-non-latin-characters-in-shopify-shipping-address"
-  status = 301
-  force = true
+# Old blog-host redirects are managed in Next.js so migration requests go directly
+# to the final canonical URLs without a Netlify-created intermediate hop.
+#
+# [[redirects]]
+#   from = "https://latinlockblog.stackorbithq.com/"
+#   to = "https://latinlock.stackorbithq.com/blog"
+#   status = 301
+#   force = true
+#
+# [[redirects]]
+#   from = "https://latinlockblog.stackorbithq.com/ecommerce-shipping-trends-2025"
+#   to = "https://latinlock.stackorbithq.com/blog/ecommerce-shipping-trends-2025"
+#   status = 301
+#   force = true
+#
+# [[redirects]]
+#   from = "https://latinlockblog.stackorbithq.com/checkout-mistakes-cost-shopify-sales"
+#   to = "https://latinlock.stackorbithq.com/blog/checkout-mistakes-cost-shopify-sales"
+#   status = 301
+#   force = true
+#
+# [[redirects]]
+#   from = "https://latinlockblog.stackorbithq.com/non-latin-addresses-carrier-issues"
+#   to = "https://latinlock.stackorbithq.com/blog/non-latin-addresses-carrier-issues"
+#   status = 301
+#   force = true
+#
+# [[redirects]]
+#   from = "https://latinlockblog.stackorbithq.com/prevent-non-latin-characters-in-shopify-shipping-address"
+#   to = "https://latinlock.stackorbithq.com/blog/prevent-non-latin-characters-in-shopify-shipping-address"
+#   status = 301
+#   force = true

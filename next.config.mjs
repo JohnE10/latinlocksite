@@ -57,28 +57,37 @@ const nextConfig = {
       },
       {
         source: '/',
-        destination: '/latinlock/blog',
+        // Use an absolute final URL so the retired blog host resolves in one hop.
+        destination: 'https://stackorbithq.com/latinlock/blog',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
       },
       {
         source: '/ecommerce-shipping-trends-2025',
-        destination: '/latinlock/blog/ecommerce-shipping-trends-2025',
+        destination: 'https://stackorbithq.com/latinlock/blog/ecommerce-shipping-trends-2025',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
       },
       {
         source: '/checkout-mistakes-cost-shopify-sales',
-        destination: '/latinlock/blog/checkout-mistakes-cost-shopify-sales',
+        destination: 'https://stackorbithq.com/latinlock/blog/checkout-mistakes-cost-shopify-sales',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
       },
       {
         source: '/non-latin-addresses-carrier-issues',
-        destination: '/latinlock/blog/non-latin-shipping-address-problem',
+        destination: 'https://stackorbithq.com/latinlock/blog/non-latin-shipping-address-problem',
+        permanent: true,
+        basePath: false,
+        has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
+      },
+      {
+        // Preserve any unchanged old-host slugs without adding an intermediate host hop.
+        source: '/:path*',
+        destination: 'https://stackorbithq.com/latinlock/blog/:path*',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
@@ -91,7 +100,7 @@ const nextConfig = {
       },
       {
         source: '/prevent-non-latin-characters-in-shopify-shipping-address',
-        destination: '/latinlock/blog/prevent-non-latin-characters-in-shopify-shipping-address',
+        destination: 'https://stackorbithq.com/latinlock/blog/prevent-non-latin-characters-in-shopify-shipping-address',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
