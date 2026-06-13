@@ -16,6 +16,10 @@ export default function Post() {
         <>
             <h1 className="text-3xl font-bold my-4">Why Non-Latin Characters in Shopify Shipping Addresses Cause Carrier Errors and Fulfillment Failures</h1>
 
+            <p className="my-4">
+                <strong>Written by John E.</strong> I'm a Shopify developer and app builder who works a lot with checkout behavior, theme customization, and the kinds of shipping problems merchants usually only notice once orders start going sideways.
+            </p>
+
             <h2 className="text-2xl font-bold my-4">The Problem You Never Saw Coming</h2>
 
             <p className="my-4">
@@ -25,6 +29,27 @@ export default function Post() {
             <p className="my-4">
                 No matter who you try, DHL, UPS, or FedEx, the foreign script throws a monkey wrench in the process forcing you to cancel orders that can't be shipped, deal with angry customers that won't get that item they so wanted, and at times eat unnecessary extra costs.
             </p>
+
+            <h2 className="text-2xl font-bold my-4">What Actually Goes Wrong</h2>
+
+            <p className="my-4">
+                A lot of merchants first assume this is just a label-printing annoyance. It can be that, but the problem usually runs deeper than that.
+            </p>
+
+            <ul className="list-disc list-outside pl-8">
+                <li className="my-1">
+                    The carrier or shipping software may reject the address when the label is created.
+                </li>
+                <li className="my-1">
+                    The warehouse team may not be able to verify or correct the address with confidence.
+                </li>
+                <li className="my-1">
+                    Cross-border shipping data can become harder to process cleanly when the routing fields are not in Latin script.
+                </li>
+                <li className="my-1">
+                    Customer support gets dragged in after the order is already placed, which means delays, back-and-forth emails, and sometimes cancellations.
+                </li>
+            </ul>
 
             <h2 className="text-2xl font-bold my-4">Why Carriers Require Latin Characters</h2>
 
@@ -40,6 +65,10 @@ export default function Post() {
 
             <p className="my-4">
                 Shopify doesn't flag non-Latin characters in the shipping address fields. One reason for this could be that domestic shipments in countries using non-Latin scripts are handled by local carriers and do not require the Latin alphabet. This only becomes an issue for international orders.
+            </p>
+
+            <p className="my-4">
+                That's really the key point. Shopify is just accepting what the customer types into the address fields. The carrier issue shows up later, after the order is already in, not while the buyer is filling out checkout.
             </p>
 
             <h2 className="text-2xl font-bold my-4">What Merchants Usually Try First (And Why It Doesn't Work)</h2>
@@ -111,6 +140,20 @@ export default function Post() {
                     Not require Shopify Plus, unlike many Shopify checkout apps.
                 </li>
             </ul>
+
+            <h2 className="text-2xl font-bold my-4">Quick FAQ</h2>
+
+            <p className="my-4">
+                <strong>What about accented Latin characters like é, ü, or ñ?</strong> Those are Latin-script characters with diacritics, so they are not the same kind of issue as Greek, Cyrillic, Japanese, Arabic, or other non-Latin scripts. Even so, merchants should still test their own carriers and shipping workflow, because some systems handle those characters more reliably than others.
+            </p>
+
+            <p className="my-4">
+                <strong>Does the address need to be translated or transliterated?</strong> Usually transliteration is the safer starting point, because it keeps the original address intact while converting it into a Latin-script form. But it is not always that simple. Some parts of an address may be better transliterated, while others may already have a commonly used Latin-script or English form in international shipping. So really, addresses often have to be handled case by case instead of pushed through one blanket conversion rule.
+            </p>
+
+            <p className="my-4">
+                <strong>Is it only the street line that causes trouble?</strong> No. The city, the recipient name, and sometimes more than one address field can all become part of the problem if the shipping workflow expects the address in Latin script.
+            </p>
 
             <h2 className="text-2xl font-bold my-4">The Bottom Line</h2>
 
