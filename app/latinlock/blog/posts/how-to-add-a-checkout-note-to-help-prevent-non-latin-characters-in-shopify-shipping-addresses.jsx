@@ -10,7 +10,7 @@ export const metadata = {
   description: "Learn how to add a Shopify checkout note for non-Latin shipping addresses, where it helps, and where validation is still needed.",
   slug: "how-to-add-a-checkout-note-to-help-prevent-non-latin-characters-in-shopify-shipping-addresses",
   tags: ["e-commerce", "shipping", "Shopify", "logistics", "2025"],
-  thumbnail: "/images/latinlock_2026-01-07_1.jpg",
+  thumbnail: null,
 };
 
 export default function Post() {
