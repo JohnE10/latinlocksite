@@ -18,45 +18,16 @@ export default function Post() {
     <article className="prose max-w-none">
       <h1 className="text-3xl font-bold my-4">How to Add a Checkout Note to Help Prevent Non-Latin Characters in Shopify Shipping Addresses</h1>
       <p className='my-4'>
-        For merchants shipping globally, invalid addresses can quickly turn into
-        costly headaches. Many international carriers cannot process non-Latin
-        or non-Roman characters, and when those characters appear in a shipping
-        address, the result is often failed deliveries, returned packages,
-        refunds, and frustrated customers.
+        If you ship internationally on Shopify, adding a checkout note is one
+        of the simplest things you can do to try to reduce address problems
+        caused by non-Latin characters.
       </p>
 
-      <div className="flex justify-center my-6 py-[40px]">
-        <Image
-          src="/images/latinlock_2026-01-07_1.jpg"
-          alt="checkout-Note"
-          width={400}
-          height={400}
-          className="rounded-lg shadow-md"
-          sizes="(max-width: 768px) 100vw, 600px"
-        />
-      </div>
-
-      <p className='my-4'>There are two ways to address this issue:</p>
-
-      <ol className='list-decimal list-outside pl-8'>
-        <li className='my-2'>
-          A <strong>free solution</strong> that adds a message at checkout
-          advising customers to use only Latin characters. This helps reduce
-          mistakes but does not prevent customers from entering invalid
-          characters.
-        </li>
-        <li className='my-2'>
-          A <strong>paid solution</strong> that actively prevents customers from
-          proceeding with non-Latin characters and prompts them to correct their
-          address before completing checkout.
-        </li>
-      </ol>
-
       <p className='my-4'>
-        In this guide, we will start with the free solution and walk through the
-        setup step by step. Toward the end of the post, we will explain the paid
-        solution and why it provides stronger protection for international
-        shipments.
+        It is not a complete fix, but it can help by putting the warning in
+        front of the customer before the order is placed. In this post, I'll
+        walk through how to add that note, where to find the right text field,
+        and where this approach still falls short.
       </p>
 
       <h2 className='text-2xl font-bold my-4'>Why non-Latin characters cause shipping problems</h2>
@@ -86,6 +57,17 @@ export default function Post() {
         warning at checkout can help reduce these problems before an order is
         placed.
       </p>
+
+      <div className="flex justify-center my-6 py-[40px]">
+        <Image
+          src="/images/latinlock_2026-6-13.jpg"
+          alt="checkout-Note"
+          width={500}
+          height={500}
+          className="rounded-lg shadow-md"
+          sizes="(max-width: 768px) 100vw, 600px"
+        />
+      </div>
 
       <h2 className='text-2xl font-bold my-4'>The free solution: adding a note on the checkout page</h2>
 
@@ -122,14 +104,7 @@ export default function Post() {
         <strong>Step 2</strong>: Navigate to the checkout text
       </h3>
 
-
-
-      <p className='my-4'>Inside the Theme content editor:</p>
-
-      <ol className='list-decimal list-outside pl-8'>
-        <li className='my-2'>Click Checkout and system in the top navigation bar</li>
-        <li className='my-2'>Then select Checkout</li>
-      </ol>
+      <p className='my-4'>Inside the Theme content editor, click Checkout and system in the top navigation bar.</p>
 
 
 
@@ -145,7 +120,7 @@ export default function Post() {
 
       <ol className='list-decimal list-outside pl-8'>
         <li className='my-2'>
-          Use Ctrl + F for windows, or Cmd + F for Mac
+          Use Ctrl + F on Windows, or Cmd + F on Mac
         </li>
         <li className='my-2'>
           In the search box that appears, type: shipping address, then press
@@ -161,7 +136,7 @@ export default function Post() {
       </p>
 
       <p className='my-4'>
-        You&apos;re looking for the input box labled &apos;Shipping address&apos;
+        You&apos;re looking for the input box labeled &apos;Shipping address&apos;
         under &apos;Checkout delivery options&apos;. This should be the first
         one on the list below the search box.
       </p>
@@ -178,7 +153,7 @@ export default function Post() {
 
       <p className='my-4'>
         In the &apos;Shipping address&apos; text box that comes up (under
-        &apos;Checkout delivery options&apos;), Enter &apos;Shipping address&apos;
+        &apos;Checkout delivery options&apos;), enter &apos;Shipping address&apos;
         plus your note, for example: &apos;Shipping address (Please enter only
         Latin/Roman characters)&apos;.
       </p>
@@ -223,22 +198,23 @@ export default function Post() {
 
 
       <p className='my-4'>
-        This means the free solution relies on customer compliance rather than
-        enforcement.
+        So in the end, this approach depends on the customer noticing the note
+        and following it.
       </p>
 
-      <h2 className='text-2xl font-bold my-4'>The paid solution: LatinLock</h2>
+      <h2 className='text-2xl font-bold my-4'>If you want stronger protection</h2>
 
       <p className='my-4'>
-        For merchants who want to fully eliminate shipping address issues caused
-        by non-Latin characters, a stronger solution is required.
+        If you want something stronger than a warning message, then you need a
+        solution that actually checks the address fields and stops checkout when
+        invalid characters are entered.
       </p>
 
       <p className='my-4'>
         <a style={{ color: "#0000FF" }} href="https://apps.shopify.com/latinlock">LatinLock</a> is a Shopify
         app that prevents non-Latin or non-Roman characters from being entered
-        into shipping address fields at checkout. Instead of displaying a
-        warning only:
+        into shipping address fields at checkout. Instead of just showing a
+        warning:
       </p>
 
       <ul className="list-disc list-outside pl-8">
@@ -252,17 +228,16 @@ export default function Post() {
 
 
       <p className='my-4'>
-        Many merchants use both approaches together. The checkout message sets
-        expectations, while LatinLock enforces compliance and prevents errors
-        entirely.
+        Some merchants use both approaches together. The checkout note sets the
+        expectation, and LatinLock handles the enforcement.
       </p>
 
       <div className="flex justify-center my-6 py-[40px]">
         <Image
-          src="/images/latinlock_2026-01-07_2.jpg"
+          src="/images/latinlock_2026-6-13_2.jpg"
           alt="checkout-Note"
-          width={400}
-          height={400}
+          width={500}
+          height={500}
           className="rounded-lg shadow-md"
           sizes="(max-width: 768px) 100vw, 600px"
         />

@@ -79,7 +79,7 @@ const nextConfig = {
       },
       {
         source: '/non-latin-addresses-carrier-issues',
-        destination: 'https://stackorbithq.com/latinlock/blog/non-latin-shipping-address-problem',
+        destination: 'https://stackorbithq.com/latinlock/blog/why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
@@ -95,15 +95,26 @@ const nextConfig = {
       // Added redirect for the old broken primary-domain blog slug.
       {
         source: '/latinlock/blog/non-latin-addresses-carrier-issues',
-        destination: '/latinlock/blog/non-latin-shipping-address-problem',
+        destination: '/latinlock/blog/why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures',
         permanent: true,
       },
       {
         source: '/prevent-non-latin-characters-in-shopify-shipping-address',
-        destination: 'https://stackorbithq.com/latinlock/blog/prevent-non-latin-characters-in-shopify-shipping-address',
+        destination: 'https://stackorbithq.com/latinlock/blog/why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures',
         permanent: true,
         basePath: false,
         has: [{ type: 'host', value: 'latinlockblog.stackorbithq.com' }],
+      },
+      {
+        // Consolidate overlapping primary-domain posts into the flagship article.
+        source: '/latinlock/blog/prevent-non-latin-characters-in-shopify-shipping-address',
+        destination: '/latinlock/blog/why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures',
+        permanent: true,
+      },
+      {
+        source: '/latinlock/blog/non-latin-shipping-address-problem',
+        destination: '/latinlock/blog/why-non-latin-characters-in-shopify-shipping-addresses-cause-carrier-errors-and-fulfillment-failures',
+        permanent: true,
       },
       {
         source: '/',
